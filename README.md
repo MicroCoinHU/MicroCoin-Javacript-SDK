@@ -14,7 +14,7 @@ MicroCoin Rider is a simple REST API. You can call using any language what you p
 At this time we are offering PHP and Javascript SDKs, but you can generate your own using the [swagger codegen](https://github.com/swagger-api/swagger-codegen) project.
 
 ## Networks
-We have to networks.
+We have two networks.
 The Mainnet, where the production coin runs and the Testnet where you can develop.
 The primary Mainnet endpoint: https://rider.microcoin.hu.
 The primary Testnet endpoint: https://testnet.rider.microcoin.hu.
