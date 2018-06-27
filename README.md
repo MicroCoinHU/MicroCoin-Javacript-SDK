@@ -128,6 +128,7 @@ accountApi.getOffers().then(offers => console.log(offers));
 ## Purchase account
 You can purchase any account for sale, if you have enough coins.
 ```js
+var accountApi = new MicroCoin.AccountApi();
 var purchaseRequest = new MicroCoin.PurchaseAccountRequest();
 purchaseRequest.setAccountNumber("34689-25"); // The account to purchase
 purchaseRequest.setFounderAccount("1-22");   // The founder account will pay for the account
@@ -174,6 +175,7 @@ transactionApi.startTransaction(sendCoinRequest).then(function (transaction) {
 ## Change account owner
 If you want change your account owner, you can do it with change the assigned public key.
 ```js
+var accountApi = new MicroCoin.AccountApi();
 var request = new MicroCoin.ChangeKeyRequest();
 request.setAccountNumber("0-10"); // The account to change
 // newKey: Public key of the new owner
@@ -192,3 +194,9 @@ accountApi.startChangeKey(request).then(function (transaction) {
     accountApi.commitChangeKey(transaction).then((response)=>console.log(response), e => console.error(e));
 });
 ```
+## Transaction history
+You can fetch the transaction history of any account
+```js
+var accountApi = new MicroCoin.AccountApi();
+api.getTransactions("0-10").then(history=>console.log(history));
+````

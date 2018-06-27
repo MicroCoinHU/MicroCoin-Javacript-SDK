@@ -64,3 +64,4 @@ typings/
 /.travis.yml
 /git_push.sh
 /mocha.opts
+/.idea
