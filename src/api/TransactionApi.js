@@ -47,22 +47,14 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the commitTransaction operation.
-     * @callback module:api/TransactionApi~commitTransactionCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Transaction} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Commit a signed transaction
      * After you created and signed your transaction, you need to commit it.
      * @param {module:model/TransactionRequest} data The signed transaction
-     * @param {module:api/TransactionApi~commitTransactionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Transaction}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Transaction} and HTTP response
      */
-    this.commitTransaction = function(data, callback) {
+    this.commitTransactionWithHttpInfo = function(data) {
       var postBody = data;
 
       // verify the required parameter 'data' is set
@@ -90,26 +82,31 @@
       return this.apiClient.callApi(
         '/api/Transaction/commit', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the getTransaction operation.
-     * @callback module:api/TransactionApi~getTransactionCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Transaction} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Commit a signed transaction
+     * After you created and signed your transaction, you need to commit it.
+     * @param {module:model/TransactionRequest} data The signed transaction
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Transaction}
      */
+    this.commitTransaction = function(data) {
+      return this.commitTransactionWithHttpInfo(data)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Retrieve single transaction by hash
      * If you know the transaction hash (ophash), you can retreive the transaction details
      * @param {String} ophash Transaction hash
-     * @param {module:api/TransactionApi~getTransactionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Transaction}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Transaction} and HTTP response
      */
-    this.getTransaction = function(ophash, callback) {
+    this.getTransactionWithHttpInfo = function(ophash) {
       var postBody = null;
 
       // verify the required parameter 'ophash' is set
@@ -138,26 +135,31 @@
       return this.apiClient.callApi(
         '/api/Transaction/{ophash}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the startTransaction operation.
-     * @callback module:api/TransactionApi~startTransactionCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/TransactionRequest} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Retrieve single transaction by hash
+     * If you know the transaction hash (ophash), you can retreive the transaction details
+     * @param {String} ophash Transaction hash
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Transaction}
      */
+    this.getTransaction = function(ophash) {
+      return this.getTransactionWithHttpInfo(ophash)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Create transaction for sign
      * To send coins you need to create and send transactions. Using this method you can validate your transaction and you will get a transaction hash. This is the hash what you need to sign using your private key, then you can commit your transaction with your valid signature
      * @param {module:model/TransactionRequest} data Basic transaction data
-     * @param {module:api/TransactionApi~startTransactionCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/TransactionRequest}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TransactionRequest} and HTTP response
      */
-    this.startTransaction = function(data, callback) {
+    this.startTransactionWithHttpInfo = function(data) {
       var postBody = data;
 
       // verify the required parameter 'data' is set
@@ -185,8 +187,21 @@
       return this.apiClient.callApi(
         '/api/Transaction/start', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Create transaction for sign
+     * To send coins you need to create and send transactions. Using this method you can validate your transaction and you will get a transaction hash. This is the hash what you need to sign using your private key, then you can commit your transaction with your valid signature
+     * @param {module:model/TransactionRequest} data Basic transaction data
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/TransactionRequest}
+     */
+    this.startTransaction = function(data) {
+      return this.startTransactionWithHttpInfo(data)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
   };
 

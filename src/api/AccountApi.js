@@ -47,22 +47,14 @@
     this.apiClient = apiClient || ApiClient.instance;
 
 
-    /**
-     * Callback function to receive the result of the commitChangeKey operation.
-     * @callback module:api/AccountApi~commitChangeKeyCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ChangeKey} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * Commit change key transaction
      * With the change key transaction you can transfer your account to a new owner. To send a new changekey transaction you need to create a transaction using the StartChangeKey method,  then sign it with your private key. You can send your transaction using this method.
      * @param {module:model/ChangeKeyRequest} changeKey The signed transaction
-     * @param {module:api/AccountApi~commitChangeKeyCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ChangeKey}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ChangeKey} and HTTP response
      */
-    this.commitChangeKey = function(changeKey, callback) {
+    this.commitChangeKeyWithHttpInfo = function(changeKey) {
       var postBody = changeKey;
 
       // verify the required parameter 'changeKey' is set
@@ -90,26 +82,31 @@
       return this.apiClient.callApi(
         '/api/Account/change-key/commit', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the commitPurchaseAccount operation.
-     * @callback module:api/AccountApi~commitPurchaseAccountCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PurchaseAccount} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Commit change key transaction
+     * With the change key transaction you can transfer your account to a new owner. To send a new changekey transaction you need to create a transaction using the StartChangeKey method,  then sign it with your private key. You can send your transaction using this method.
+     * @param {module:model/ChangeKeyRequest} changeKey The signed transaction
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ChangeKey}
      */
+    this.commitChangeKey = function(changeKey) {
+      return this.commitChangeKeyWithHttpInfo(changeKey)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Commit signed Purchase account transaction
      * If you created and signed your \&quot;Purchase account\&quot; transaction you need to send it into the network. Call this method to send and commit your signed \&quot;Purchase account\&quot; transaction.
      * @param {module:model/PurchaseAccountRequest} data Signed transaction
-     * @param {module:api/AccountApi~commitPurchaseAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PurchaseAccount}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PurchaseAccount} and HTTP response
      */
-    this.commitPurchaseAccount = function(data, callback) {
+    this.commitPurchaseAccountWithHttpInfo = function(data) {
       var postBody = data;
 
       // verify the required parameter 'data' is set
@@ -137,26 +134,31 @@
       return this.apiClient.callApi(
         '/api/Account/purchase/commit', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the getAccount operation.
-     * @callback module:api/AccountApi~getAccountCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Account} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Commit signed Purchase account transaction
+     * If you created and signed your \&quot;Purchase account\&quot; transaction you need to send it into the network. Call this method to send and commit your signed \&quot;Purchase account\&quot; transaction.
+     * @param {module:model/PurchaseAccountRequest} data Signed transaction
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PurchaseAccount}
      */
+    this.commitPurchaseAccount = function(data) {
+      return this.commitPurchaseAccountWithHttpInfo(data)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Account detils
      * You can retrieve details (balance, name, type, etc.) of any account, if you know the account number.
      * @param {String} accountNumber Account number, example: 1-22, or 1
-     * @param {module:api/AccountApi~getAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Account}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
      */
-    this.getAccount = function(accountNumber, callback) {
+    this.getAccountWithHttpInfo = function(accountNumber) {
       var postBody = null;
 
       // verify the required parameter 'accountNumber' is set
@@ -185,25 +187,30 @@
       return this.apiClient.callApi(
         '/api/Account/{AccountNumber}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the getOffers operation.
-     * @callback module:api/AccountApi~getOffersCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Account>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Account detils
+     * You can retrieve details (balance, name, type, etc.) of any account, if you know the account number.
+     * @param {String} accountNumber Account number, example: 1-22, or 1
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
      */
+    this.getAccount = function(accountNumber) {
+      return this.getAccountWithHttpInfo(accountNumber)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Get list of accounts for sale
      * This is the list of accounts for sale.             You can purchase accounts if you have enough MicroCoin in your founder account.             The account price will be deducted from the founder account balance.             You must sign the transaction with the founder account private key.             
-     * @param {module:api/AccountApi~getOffersCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Account>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Account>} and HTTP response
      */
-    this.getOffers = function(callback) {
+    this.getOffersWithHttpInfo = function() {
       var postBody = null;
 
 
@@ -226,17 +233,22 @@
       return this.apiClient.callApi(
         '/api/Account/offers', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the getTransactions operation.
-     * @callback module:api/AccountApi~getTransactionsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Transaction>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Get list of accounts for sale
+     * This is the list of accounts for sale.             You can purchase accounts if you have enough MicroCoin in your founder account.             The account price will be deducted from the founder account balance.             You must sign the transaction with the founder account private key.             
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Account>}
      */
+    this.getOffers = function() {
+      return this.getOffersWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Retrieve account transaction history
@@ -244,10 +256,9 @@
      * @param {Object} opts Optional parameters
      * @param {Number} opts.start Start from
      * @param {Number} opts.max Maximum lines to receive
-     * @param {module:api/AccountApi~getTransactionsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Transaction>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Transaction>} and HTTP response
      */
-    this.getTransactions = function(accountNumber, opts, callback) {
+    this.getTransactionsWithHttpInfo = function(accountNumber, opts) {
       opts = opts || {};
       var postBody = null;
 
@@ -279,26 +290,33 @@
       return this.apiClient.callApi(
         '/api/Account/{AccountNumber}/history', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the myAccounts operation.
-     * @callback module:api/AccountApi~myAccountsCallback
-     * @param {String} error Error message, if any.
-     * @param {Array.<module:model/Account>} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Retrieve account transaction history
+     * @param {String} accountNumber Account number to 
+     * @param {Object} opts Optional parameters
+     * @param {Number} opts.start Start from
+     * @param {Number} opts.max Maximum lines to receive
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Transaction>}
      */
+    this.getTransactions = function(accountNumber, opts) {
+      return this.getTransactionsWithHttpInfo(accountNumber, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Get a list of accounts belonging to the key
      * Every account belongs to a public key. If you know the public key you can retrieve the list of accounts belonging to the key.
      * @param {module:model/SimpleKey} key The public key
-     * @param {module:api/AccountApi~myAccountsCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/Account>}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Account>} and HTTP response
      */
-    this.myAccounts = function(key, callback) {
+    this.myAccountsWithHttpInfo = function(key) {
       var postBody = key;
 
       // verify the required parameter 'key' is set
@@ -326,26 +344,31 @@
       return this.apiClient.callApi(
         '/api/Account/list', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the startChangeKey operation.
-     * @callback module:api/AccountApi~startChangeKeyCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ChangeKeyRequest} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Get a list of accounts belonging to the key
+     * Every account belongs to a public key. If you know the public key you can retrieve the list of accounts belonging to the key.
+     * @param {module:model/SimpleKey} key The public key
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Account>}
      */
+    this.myAccounts = function(key) {
+      return this.myAccountsWithHttpInfo(key)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Create new change key transaction
      * With the change key transaction you can transfer your account to a new owner. To send a new changekey transaction you need to create a transaction using this this method,  then sign it with your private key. You can send your transaction using the CommitChangeKey method.
      * @param {module:model/ChangeKeyRequest} changeKey Initial transaction data
-     * @param {module:api/AccountApi~startChangeKeyCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ChangeKeyRequest}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ChangeKeyRequest} and HTTP response
      */
-    this.startChangeKey = function(changeKey, callback) {
+    this.startChangeKeyWithHttpInfo = function(changeKey) {
       var postBody = changeKey;
 
       // verify the required parameter 'changeKey' is set
@@ -373,26 +396,31 @@
       return this.apiClient.callApi(
         '/api/Account/change-key/start', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
     }
 
     /**
-     * Callback function to receive the result of the startPurchaseAccount operation.
-     * @callback module:api/AccountApi~startPurchaseAccountCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PurchaseAccountRequest} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * Create new change key transaction
+     * With the change key transaction you can transfer your account to a new owner. To send a new changekey transaction you need to create a transaction using this this method,  then sign it with your private key. You can send your transaction using the CommitChangeKey method.
+     * @param {module:model/ChangeKeyRequest} changeKey Initial transaction data
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ChangeKeyRequest}
      */
+    this.startChangeKey = function(changeKey) {
+      return this.startChangeKeyWithHttpInfo(changeKey)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * Create purchase account transaction
      * If you want to purchase an account you need to create a new transaction, sign it then send it into the newtwork. This method creates a new transaction and a hash for you. You need to sign the hash then commit your transaction with the CommitPurchaseAccount method
      * @param {module:model/PurchaseAccountRequest} data Transaction data
-     * @param {module:api/AccountApi~startPurchaseAccountCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PurchaseAccountRequest}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PurchaseAccountRequest} and HTTP response
      */
-    this.startPurchaseAccount = function(data, callback) {
+    this.startPurchaseAccountWithHttpInfo = function(data) {
       var postBody = data;
 
       // verify the required parameter 'data' is set
@@ -420,8 +448,21 @@
       return this.apiClient.callApi(
         '/api/Account/purchase/start', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
+        authNames, contentTypes, accepts, returnType
       );
+    }
+
+    /**
+     * Create purchase account transaction
+     * If you want to purchase an account you need to create a new transaction, sign it then send it into the newtwork. This method creates a new transaction and a hash for you. You need to sign the hash then commit your transaction with the CommitPurchaseAccount method
+     * @param {module:model/PurchaseAccountRequest} data Transaction data
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PurchaseAccountRequest}
+     */
+    this.startPurchaseAccount = function(data) {
+      return this.startPurchaseAccountWithHttpInfo(data)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
   };
 
