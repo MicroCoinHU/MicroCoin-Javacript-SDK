@@ -1,4 +1,4 @@
-# MicroCoin API
+﻿# MicroCoin API
 MicroCoin Rider is an API server for the MicroCoin ecosystem.
 It acts as the interface between MicroCoin network and applications that want to access the MicroCoin network.
 It allows you to submit transactions to the network, check the status of accounts, subscribe to transactions, etc.
@@ -199,4 +199,10 @@ You can fetch the transaction history of any account
 ```js
 var accountApi = new MicroCoin.AccountApi();
 api.getTransactions("0-10").then(history=>console.log(history));
+````
+## Fetch transaction details
+If you know the ophash, you can retrieve transaction details
+```js
+var accountApi = new MicroCoin.TransactionApi();
+api.getTransactions("OPHASH").then(transaction=>console.log(transaction));
 ````
