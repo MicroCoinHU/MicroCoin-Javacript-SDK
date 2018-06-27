@@ -37,7 +37,7 @@ After this, the owner of the account will be you, and the old owner will not hav
 
 ## Download the client SDK
 First you need a MicroCoin client SDK.
-You can download it from [here](), or clone from our [Github](https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK) repository.
+You can download it from [here](https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK/releases/), or clone from our [Github](https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK) repository.
 ```bash
 git clone https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK.git
 ```
