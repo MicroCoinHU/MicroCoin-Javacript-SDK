@@ -40,8 +40,10 @@ First you need a MicroCoin client SDK.
 You can download it from [here](https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK/releases/), or clone from our [Github](https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK) repository.
 ```bash
 git clone https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK.git
+npm install
+npm i elliptic
 ```
-In the dist folder you will find the precompiled, production ready files.
+Or in the dist folder you will find the precompiled, production ready files. Copy this files into your project and start working.
 
 ## Keys and signatures
 MicroCoin works with ECDSA signatures, so you need to work with ECDSA keys and signatures.
