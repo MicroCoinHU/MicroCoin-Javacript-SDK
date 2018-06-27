@@ -1,4 +1,4 @@
-﻿# MicroCoin API
+# MicroCoin API
 MicroCoin Rider is an API server for the MicroCoin ecosystem.
 It acts as the interface between MicroCoin network and applications that want to access the MicroCoin network.
 It allows you to submit transactions to the network, check the status of accounts, subscribe to transactions, etc.
@@ -37,16 +37,35 @@ After this, the owner of the account will be you, and the old owner will not hav
 
 ## Download the client SDK
 First you need a MicroCoin client SDK.
-You can download it from [here](), or clone from our [Github](https://github.com) repository.
+You can download it from [here](), or clone from our [Github](https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK) repository.
 ```bash
-git clone https://
-npm i elliptic
-npm install
+git clone https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK.git
 ```
+In the dist folder you will find the precompiled, production ready files.
+
 ## Keys and signatures
 MicroCoin works with ECDSA signatures, so you need to work with ECDSA keys and signatures.
 You can use your favorite **ECDSA** package, or use `elliptic.js`. We are using `elliptic.js` in our demos.
 You can find a detailed documentation on the official github page https://github.com/indutny/elliptic
+
+## HTML boilerplate
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MicroCoin client minimum project</title>
+    <script src="/dist/microcoin-promise.js"></script>
+    <script src="/dist/elliptic.js"></script>
+</head>
+<body>
+<script>
+    var api = new MicroCoin.AccountApi();
+    api.getAccount("0-10").then(account => console.log(account));
+</script>
+</body>
+</html>
+```
 
 ## Generate new ECDSA keyPair
 If you have no keys, you must generate a new key, then store it in a secure place.
@@ -60,12 +79,12 @@ If you have a key, you can import it from a hexadecimal string.
 ```js
 var ec = new elliptic.ec("secp256k1");
 var myKey = ec.keyPair({ "priv":"PRIVATE KEY IN HEX", "privEnc":"hex" });
+```
 
 ### Where is your private key?
 
 ![Private key](/img/privkey.png)
 
-```
 ## Export ECDSA key
 Sometimes you need save your key, or you need to display it. You can export your key using this method
 ```js

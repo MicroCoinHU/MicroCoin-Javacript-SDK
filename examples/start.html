@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MicroCoin client minimum project</title>
+    <script src="../dist/microcoin-promise.js"></script>
+    <script src="../dist/elliptic.js"></script>
+</head>
+<body>
+<script>
+    var api = new MicroCoin.AccountApi();
+    api.getAccount("0-10").then(account => console.log(account));
+</script>
+</body>
+</html>
