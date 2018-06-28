@@ -1,4 +1,4 @@
-﻿# MicroCoin API
+# MicroCoin API
 MicroCoin Rider is an API server for the MicroCoin ecosystem.
 It acts as the interface between MicroCoin network and applications that want to access the MicroCoin network.
 It allows you to submit transactions to the network, check the status of accounts, subscribe to transactions, etc.
@@ -42,7 +42,7 @@ git clone https://github.com/MicroCoinHU/MicroCoin-Javacript-SDK.git
 npm install
 npm i elliptic
 ```
-Or in the dist folder you will find the precompiled, production ready files. Copy this files into your project and start working.
+Or in the **[dist](/dist)** folder you will find the precompiled, production ready files. Copy this files into your project and start working.
 
 ## Keys and signatures
 MicroCoin works with ECDSA signatures, so you need to work with ECDSA keys and signatures.
