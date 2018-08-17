@@ -467,7 +467,7 @@ function Response(req) {
      : null;
   this.statusText = this.req.xhr.statusText;
   var status = this.xhr.status;
-  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
+  // handle IE9 bug: https:////stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
   if (status === 1223) {
       status = 204;
   }
@@ -2002,9 +2002,9 @@ exports.cleanHeader = function(header, shouldStripCookie){
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
-     * @default http://rider.microcoin.hu
+     * @default https:////rider.microcoin.hu
      */
-    this.basePath = 'http://rider.microcoin.hu'.replace(/\/+$/, '');
+    this.basePath = 'https:////rider.microcoin.hu'.replace(/\/+$/, '');
 
     /**
      * The authentication methods to be included for all API calls.
@@ -2296,7 +2296,7 @@ exports.cleanHeader = function(header, shouldStripCookie){
       return null;
     }
     // Rely on SuperAgent for parsing response body.
-    // See http://visionmedia.github.io/superagent/#parsing-response-bodies
+    // See https:////visionmedia.github.io/superagent/#parsing-response-bodies
     var data = response.body;
     if (data == null || (typeof data === 'object' && typeof data.length === 'undefined' && !Object.keys(data).length)) {
       // SuperAgent does not always produce a body; use the unparsed response as a fallback
@@ -6147,7 +6147,7 @@ function utf8Slice (buf, start, end) {
   return decodeCodePointsArray(res)
 }
 
-// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// Based on https:////stackoverflow.com/a/22747272/680742, the browser with
 // the lowest limit is Chrome, with 0x10000 args.
 // We go 1 magnitude less, for safety
 var MAX_ARGUMENTS_LENGTH = 0x1000
